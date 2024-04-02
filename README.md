@@ -63,5 +63,5 @@ For more projects and information about the developer, please visit:
 - https://codereview.stackexchange.com/questions/120106/weather-app-using-the-openweathermap-com-api
 
 ## License
-This project is licensed under the open-source License.
+This project is licensed under MIT License.
 
