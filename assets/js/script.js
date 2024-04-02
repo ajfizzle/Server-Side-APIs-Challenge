@@ -7,7 +7,6 @@ $(document).ready(function(){
 
     searchHistory();
     
-
     // Display recently searched cities stored in search history
     function storedCities() {
         let city = $(this).text();
@@ -28,7 +27,6 @@ $(document).ready(function(){
         getWeather(city);
     }
     
-     
      function searchHistory() {  //Create function to display cities search History stored in localStorage
         searchedCitiesArray = JSON.parse(localStorage.getItem("cities"));
         if (searchedCitiesArray == null) { 
@@ -42,24 +40,23 @@ $(document).ready(function(){
             $("#searchHistory").append(searchHistoryList);
         }
     }
-    
 
 //<---------------------- Weather API Call
-     
-    const apiKey = "67acae8c226e94763f4c70fdb6c20deb";  //OpenWeatherMap apiKey to call the API  
-    function getWeather(city) { // Current weather function
+const apiKey = "67acae8c226e94763f4c70fdb6c20deb";  //OpenWeatherMap apiKey to call the API
+const API_KEY = apiKey; // Creating a variable named API_KEY with the value of the key
 
-    const queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
-        
-        $.getJSON(queryURL)
-            .done(function(response) {
-                updateCurrentWeather(response.list[0], response.city);
-                updateForecast(response.list);
-            })
-            .fail(function(jqxhr, textStatus, error) {
-                console.log("Request Failed: " + textStatus + ", " + error);
-            });
-    }
+function getWeather(city) { // Current weather function
+    const queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + API_KEY;
+
+    $.getJSON(queryURL)
+        .done(function(response) {
+            updateCurrentWeather(response.list[0], response.city);
+            updateForecast(response.list);
+        })
+        .fail(function(jqxhr, textStatus, error) {
+            console.log("Request Failed: " + textStatus + ", " + error);
+        });
+}
     
     function updateCurrentWeather(data, city) {
         let dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
@@ -76,7 +73,6 @@ $(document).ready(function(){
   $("#previousSearches").empty();
   const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
 
-
 //<---------------------- Displays data for 5 Days Weather Forecast
   for (let i = 0; i <=5; i++) {
     let data = list[i * 8]; // Adjust the index to cover all five days
@@ -92,7 +88,6 @@ $(document).ready(function(){
              
  // Using lat and long with get uvIndex and display on Currentweather DOM   
  function getUVindex(lat, long) {
-    
     
         let queryURL = "https://api.openweathermap.org/data/2.5/onecall?" + "&lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
         
